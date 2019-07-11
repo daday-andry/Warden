@@ -1,1 +1,3 @@
-# Warden
+# Warden user manager bundle
+
+# Installation
