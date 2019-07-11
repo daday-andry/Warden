@@ -6,7 +6,7 @@
 3- Pour ajouter Warden User manager dans le menu :
     - Ouvrir le fichier '#warden_root/src/Deeson/WardenBundle/Resources/views/layout.html.twig'
     - AJouter le code suivant anvant la fermeture du balise </ul> dans la ligne 147
-        "<li>
+        <li>
             <a href="{{ path('warden_user_manager_homepage') }}"><i class="fa fa-user"></i> &nbsp;<span>User Manager</span></a>
-        </li>"
+        </li>
 
