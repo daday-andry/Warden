@@ -1,0 +1,4 @@
+services:
+#    warden_user_manager.example:
+#        class: Warden\UserManagerBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

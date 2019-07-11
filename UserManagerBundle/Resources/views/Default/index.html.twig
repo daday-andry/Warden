@@ -1,0 +1,113 @@
+{% extends 'DeesonWardenBundle::layout.html.twig' %}
+
+{% block title %}Warden user manager{% endblock %}
+
+{% block page_title 'Warden user manager' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-8">
+            <table class="table table-hover">
+                <tr>
+                    <th>ID</th>
+                    <th>User Name</th>
+                    <th>Role</th>
+                    <th>Option</th>
+                </tr>
+                {% for user_name,user in users %}
+                <tr>
+                    <td>
+                        {{loop.index}}
+                    </td>
+                    <td class="username">
+                        {{user_name}}
+                    </td>
+                    <td>
+                        [
+                            {% for user_role in user['roles'] %}
+                                -{{ user_role }} -
+                            {% endfor %}                            
+                        ]
+                    </td>
+                    <td>
+                        <button >Edit</boutton>
+                        <button class="dlt_btn">Delete</boutton>
+                    </td>
+
+                </td>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-sm-4">
+        <form action="{{ path("warden_user_manager_add") }}" method="post" >    
+            <div class="form-group">
+                <label for="exampleInputPassword1">User name</label>
+                <input type="text" class="form-control" id="user_name" name="user_name" placeholder="User name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Role</label>
+                <select multiple class="form-control" id="user_role" name="user_role" required>
+                    <option value="ROLE_USER">Default</option>
+                    <option value="ROLE_USER">Super Admin</option>
+                    <option value="ROLE_USER">Admin</option>
+                    <option value="ROLE_USER">Visitor</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="user_pass" name="user_pass" placeholder="Password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputPassword1">Confirm</label>
+                <input type="password" class="form-control" id="user_pass_2" name="user_pass_2" placeholder="" required>
+            </div>
+            <div class="form-group">
+                    <button class="btn btn-info" type="submit"> Save chage</button> 
+                    <button class="btn btn-danger" type="reset">    Cancel</button> 
+            </div>
+        </div>
+    </form>
+    </div>
+
+
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Do you want realy delete !</h4>
+      </div>
+      <div class="modal-body">
+            <strong id="user_name_label">User name</stong>
+      </div>
+      <div class="modal-footer">
+        <form id="confirm_delete_form" action="{{ path("warden_user_manager_delete") }}" method="post">
+            <input type="hidden" class="user_name" name="user_name">
+            <button type="submit" class="btn btn-primary" id="modal-btn-si">Yes</button>
+            <button type="button" class="btn btn-info" data-dismiss="modal" id="modal-btn-no">No</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".dlt_btn").on("click", function(){
+            $user_name=$(this).parent().parent().children(".username").text();
+            $("#user_name_label").text($user_name);
+            $("#confirm_delete_form .user_name").val($user_name);
+            $("#mi-modal").modal('show');
+        });
+    })
+</script>
+
+
+{% endblock %}
+

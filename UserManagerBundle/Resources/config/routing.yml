@@ -1,0 +1,9 @@
+warden_user_manager_homepage:
+    path:     /
+    defaults: { _controller: WardenUserManagerBundle:Default:index }
+warden_user_manager_add:
+    path:    /add_new
+    defaults: { _controller: WardenUserManagerBundle:Default:Add_User }
+warden_user_manager_delete:
+    path:    /del
+    defaults: { _controller: WardenUserManagerBundle:Default:Del_User }
